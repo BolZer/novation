@@ -1,0 +1,27 @@
+name: flutter_sound_board
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  bloc: ^3.0.0
+  flutter_bloc: ^3.1.0
+  equatable: ^1.0.0
+  flutter_launcher_icons: "^0.7.3"
+  font_awesome_flutter: "^8.5.0"
+  sembast: ^2.1.2+2
+  uuid: ^2.0.4
+  path: ^1.6.4
+  path_provider: ^1.5.1
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
