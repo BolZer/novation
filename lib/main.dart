@@ -25,15 +25,53 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
+    var verticalItemCount = 6;
+    var itemCount = verticalItemCount * verticalItemCount;
+
+    assert(verticalItemCount % 2 == 0);
+
+    Map<int, List<Widget>> matrix = {
+      0: List.generate(itemCount ~/ 4, (int index){
+        return Container(
+          child: Center(
+            child: SoundButton(text: (index + 1).toString(), color: Colors.pinkAccent),
+          ),
+        );
+      }),
+      1: List.generate(itemCount ~/ 4, (int index){
+        return Container(
+          child: Center(
+            child: SoundButton(text: (index + 1).toString(), color: Colors.greenAccent),
+          ),
+        );
+      }),
+      2: List.generate(itemCount ~/ 4, (int index){
+        return Container(
+          child: Center(
+            child: SoundButton(text: (index + 1).toString(), color: Colors.yellowAccent),
+          ),
+        );
+      }),
+      3: List.generate(itemCount ~/ 4, (int index){
+        return Container(
+          child: Center(
+            child: SoundButton(text: (index + 1).toString(), color: Colors.blueAccent),
+          ),
+        );
+      }),
+    };
+
+    List<Widget> widgetsList = [];
+
+    matrix.forEach((int key, List<Widget> widgets){
+      widgetsList.addAll(widgets);
+    });
+
     var boardPadding = 20.0;
     var crossAxisPadding = 10.0;
-    var verticalItemCount = 6;
-
     var boardWidth = MediaQuery.of(context).size.width - boardPadding;
     var boardHeight = MediaQuery.of(context).size.height - boardPadding;
-
     var itemWidth = (boardWidth / verticalItemCount) - crossAxisPadding;
-
     var mainAxisPadding = (boardHeight / verticalItemCount) - itemWidth;
 
     return Scaffold(
@@ -48,40 +86,7 @@ class _MainState extends State<Main> {
               crossAxisCount: verticalItemCount,
               crossAxisSpacing: crossAxisPadding,
               mainAxisSpacing: mainAxisPadding,
-              children: List.generate((verticalItemCount * verticalItemCount), (int index) {
-
-                var itemCount = verticalItemCount * verticalItemCount;
-                Color color = null;
-
-                var temp = (index / 3);
-
-                // Top Half
-                if(index < itemCount / 2){
-
-                  if((temp < 1) || temp >= 2 && temp < 3 || temp >= 4 && temp < 5){
-                    color = Colors.pinkAccent;
-                  }else {
-                    color = Colors.greenAccent;
-                  }
-                }
-
-                // Bottom Half
-                if(index >= itemCount / 2){
-
-                  if((temp < 7) || temp >= 8 && temp < 9 || temp >= 10 && temp < 11){
-                    color = Colors.yellowAccent;
-                  }else {
-                    color = Colors.blueAccent;
-                  }
-
-                }
-
-                return Container(
-                  child: Center(
-                    child: SoundButton(text: (index + 1).toString(), color:color),
-                  ),
-                );
-              }),
+              children: widgetsList,
             ),
           )),
         ],
