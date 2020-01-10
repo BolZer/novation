@@ -13,6 +13,10 @@ class SoundButton extends StatefulWidget {
 class _SoundButtonState extends State<SoundButton> {
   @override
   Widget build(BuildContext context) {
-    return Text(widget.text, style: TextStyle(color: widget.color));
+    return Container(
+      width: 50.0,
+      height: 50.0,
+      color: widget.color,
+    );
   }
 }
