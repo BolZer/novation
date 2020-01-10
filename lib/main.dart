@@ -32,76 +32,75 @@ class _MainState extends State<Main> {
     assert(verticalItemCount % 2 == 0);
 
     var crossAxisPadding = 5.0;
+    var mainAxisPadding = crossAxisPadding;
+
     var quadrantPadding = crossAxisPadding / 2;
-
-    var boardWidth = MediaQuery.of(context).size.width;
-    var boardHeight = MediaQuery.of(context).size.height;
-
-    var quadrantWidth = boardWidth / 4;
-    var quadrantHeight = boardHeight / 4;
-
-    var itemWidth = (quadrantWidth / quadrantHeight) - crossAxisPadding;
-    var mainAxisPadding = (quadrantHeight / verticalItemCountQuadrant) - itemWidth;
 
     return Scaffold(
         body: SafeArea(
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                    child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: verticalItemCountQuadrant.toInt(),
-                  crossAxisSpacing: crossAxisPadding,
-                  mainAxisSpacing: mainAxisPadding,
-                  padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                  children: this._getQuadrantFixture(itemCount ~/ 4, Colors.pinkAccent),
-                  shrinkWrap: true,
-                )),
-                Expanded(
-                    child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: verticalItemCountQuadrant.toInt(),
-                  crossAxisSpacing: crossAxisPadding,
-                  mainAxisSpacing: mainAxisPadding,
-                  padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                  children: this._getQuadrantFixture(itemCount ~/ 4, Colors.greenAccent),
-                  shrinkWrap: true,
-                )),
-              ],
-            ),
+      child: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: verticalItemCountQuadrant.toInt(),
+                      crossAxisSpacing: crossAxisPadding,
+                      mainAxisSpacing: mainAxisPadding,
+                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
+                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.pinkAccent),
+                      shrinkWrap: true,
+                    )),
+                    Expanded(
+                        child: GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: verticalItemCountQuadrant.toInt(),
+                      crossAxisSpacing: crossAxisPadding,
+                      mainAxisSpacing: mainAxisPadding,
+                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
+                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.greenAccent),
+                      shrinkWrap: true,
+                    )),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: verticalItemCountQuadrant.toInt(),
+                      crossAxisSpacing: crossAxisPadding,
+                      mainAxisSpacing: mainAxisPadding,
+                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
+                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.yellowAccent),
+                      shrinkWrap: true,
+                    )),
+                    Expanded(
+                        child: GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: verticalItemCountQuadrant.toInt(),
+                      crossAxisSpacing: crossAxisPadding,
+                      mainAxisSpacing: mainAxisPadding,
+                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
+                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.lightBlueAccent),
+                      shrinkWrap: true,
+                    )),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                    child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: verticalItemCountQuadrant.toInt(),
-                  crossAxisSpacing: crossAxisPadding,
-                  mainAxisSpacing: mainAxisPadding,
-                  padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                  children: this._getQuadrantFixture(itemCount ~/ 4, Colors.yellowAccent),
-                  shrinkWrap: true,
-                )),
-                Expanded(
-                    child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: verticalItemCountQuadrant.toInt(),
-                  crossAxisSpacing: crossAxisPadding,
-                  mainAxisSpacing: mainAxisPadding,
-                  padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                  children: this._getQuadrantFixture(itemCount ~/ 4, Colors.lightBlueAccent),
-                  shrinkWrap: true,
-                )),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     ));
   }
