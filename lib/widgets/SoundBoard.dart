@@ -16,7 +16,7 @@ class SoundBoard extends StatefulWidget {
 class _SoundBoardState extends State<SoundBoard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SoundBarBloc, SoundBoardState>(
+    return BlocBuilder<SoundBoardBloc, SoundBoardState>(
       builder: (BuildContext context, SoundBoardState state) {
         return SafeArea(
           child: Column(
@@ -26,24 +26,14 @@ class _SoundBoardState extends State<SoundBoard> {
               Expanded(
                 flex: 10,
                 child: Column(
-                  children: <Widget>[
-                    Expanded(
+                  children: List.generate(4, (int index) {
+                    return Expanded(
                       child: Row(
                         children: <Widget>[
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.pinkAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
                                 color: Colors.pinkAccent,
                                 isInEditMode: state.isInEditMode,
                               ),
@@ -53,32 +43,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.greenAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.greenAccent,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
                                 color: Colors.pinkAccent,
+                                isInEditMode: state.isInEditMode,
                               ),
                             ),
                           ),
@@ -86,17 +52,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.pinkAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
                                 color: Colors.greenAccent,
+                                isInEditMode: state.isInEditMode,
                               ),
                             ),
                           ),
@@ -104,99 +61,15 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                text: 1.toString(),
                                 color: Colors.greenAccent,
+                                isInEditMode: state.isInEditMode,
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.yellowAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.yellowAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.yellowAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.yellowAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                text: 1.toString(),
-                                color: Colors.blueAccent,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    );
+                  }),
                 ),
               )
             ],

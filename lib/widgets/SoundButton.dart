@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SoundButton extends StatefulWidget {
-  final String text;
   final Color color;
   final bool isInEditMode;
 
-  SoundButton({Key key, @required this.text, this.color, this.isInEditMode = false}) : super(key: key);
+  SoundButton({Key key, this.color = Colors.grey, this.isInEditMode = false}) : super(key: key);
 
   @override
   _SoundButtonState createState() => _SoundButtonState();
@@ -25,6 +25,7 @@ class _SoundButtonState extends State<SoundButton> {
             width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             color: widget.color,
+            child: widget.isInEditMode ? Icon(FontAwesomeIcons.wrench) : null,
           ),
         );
       },

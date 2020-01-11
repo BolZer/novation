@@ -14,3 +14,15 @@ class Initialize extends SoundBoardEvent {
 class OpenEditMode extends SoundBoardEvent {
   OpenEditMode() : super();
 }
+
+class CloseEditMode extends SoundBoardEvent {
+  CloseEditMode() : super();
+}
+
+class NextPage extends SoundBoardEvent {
+  NextPage() : super();
+}
+
+class PreviousPage extends SoundBoardEvent {
+  PreviousPage() : super();
+}

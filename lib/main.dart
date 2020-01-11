@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => SoundBarBloc(),
+      create: (BuildContext context) => SoundBoardBloc(),
       child: MaterialApp(
         title: 'SB',
         theme: ThemeData.dark(),
@@ -32,7 +32,7 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final soundBarBloc = BlocProvider.of<SoundBarBloc>(context);
+    final soundBarBloc = BlocProvider.of<SoundBoardBloc>(context);
 
     soundBarBloc.add(Initialize());
 
