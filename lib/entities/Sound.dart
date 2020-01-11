@@ -4,7 +4,7 @@ class Sound {
   final String id;
   final String name;
   final String soundFilePath;
-  final String colorValue;
+  final int colorValue;
   final SoundGridPosition position;
 
   Sound({this.id, this.name, this.soundFilePath, this.colorValue, this.position});

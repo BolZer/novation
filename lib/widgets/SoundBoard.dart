@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
+import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/entities/SoundGridPosition.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:flutter_sound_board/widgets/SoundBoardToolbar.dart';
 import 'package:flutter_sound_board/widgets/SoundButton.dart';
@@ -34,7 +36,7 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                color: Colors.pinkAccent,
+                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0)),
                                 isInEditMode: state.isInEditMode,
                               ),
                             ),
@@ -43,7 +45,7 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                color: Colors.pinkAccent,
+                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 1)),
                                 isInEditMode: state.isInEditMode,
                               ),
                             ),
@@ -52,7 +54,7 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                color: Colors.greenAccent,
+                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 2)),
                                 isInEditMode: state.isInEditMode,
                               ),
                             ),
@@ -61,7 +63,7 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: SoundButton(
-                                color: Colors.greenAccent,
+                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 3)),
                                 isInEditMode: state.isInEditMode,
                               ),
                             ),
@@ -77,5 +79,15 @@ class _SoundBoardState extends State<SoundBoard> {
         );
       },
     );
+  }
+
+  Sound _getSoundForPosition(List<Sound> sounds, SoundGridPosition position) {
+    if (sounds.length == 0) {
+      return null;
+    }
+
+    return sounds.where((Sound sound) {
+      return sound.position.page == position.page && sound.position.column == position.column && sound.position.row == position.row;
+    }).first;
   }
 }

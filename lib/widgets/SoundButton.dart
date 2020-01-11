@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sound_board/entities/Sound.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SoundButton extends StatefulWidget {
-  final Color color;
+  final Sound sound;
   final bool isInEditMode;
 
-  SoundButton({Key key, this.color = Colors.grey, this.isInEditMode = false}) : super(key: key);
+  SoundButton({Key key, this.sound, this.isInEditMode = false}) : super(key: key);
 
   @override
   _SoundButtonState createState() => _SoundButtonState();
@@ -17,14 +18,16 @@ class _SoundButtonState extends State<SoundButton> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return GestureDetector(
-          onTap: () {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Test")));
-          },
+          onTap: widget.sound != null
+              ? () {
+                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Test")));
+                }
+              : null,
           child: Container(
             constraints: constraints,
             width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
-            color: widget.color,
+            color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
             child: widget.isInEditMode ? Icon(FontAwesomeIcons.wrench) : null,
           ),
         );
