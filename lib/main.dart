@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sound_board/widgets/SoundButton.dart';
+import 'package:flutter_sound_board/widgets/SoundBoard.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,93 +25,15 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
-    var verticalItemCount = 6;
-    var verticalItemCountQuadrant = verticalItemCount / 2;
-    var itemCount = verticalItemCount * verticalItemCount;
-
-    assert(verticalItemCount % 2 == 0);
-
-    var crossAxisPadding = 5.0;
-    var mainAxisPadding = crossAxisPadding;
-
-    var quadrantPadding = crossAxisPadding / 2;
-
     return Scaffold(
         body: SafeArea(
       child: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: verticalItemCountQuadrant.toInt(),
-                      crossAxisSpacing: crossAxisPadding,
-                      mainAxisSpacing: mainAxisPadding,
-                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.pinkAccent),
-                      shrinkWrap: true,
-                    )),
-                    Expanded(
-                        child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: verticalItemCountQuadrant.toInt(),
-                      crossAxisSpacing: crossAxisPadding,
-                      mainAxisSpacing: mainAxisPadding,
-                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.greenAccent),
-                      shrinkWrap: true,
-                    )),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: verticalItemCountQuadrant.toInt(),
-                      crossAxisSpacing: crossAxisPadding,
-                      mainAxisSpacing: mainAxisPadding,
-                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.yellowAccent),
-                      shrinkWrap: true,
-                    )),
-                    Expanded(
-                        child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      crossAxisCount: verticalItemCountQuadrant.toInt(),
-                      crossAxisSpacing: crossAxisPadding,
-                      mainAxisSpacing: mainAxisPadding,
-                      padding: EdgeInsets.symmetric(horizontal: quadrantPadding, vertical: 0.0),
-                      children: this._getQuadrantFixture(itemCount ~/ 4, Colors.lightBlueAccent),
-                      shrinkWrap: true,
-                    )),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        child: SoundBoard(
+          verticalItemCount: 8,
+          crossAxisPadding: 5.0,
+          mainAxisPadding: 5.0,
         ),
       ),
     ));
-  }
-
-  List<Widget> _getQuadrantFixture(int count, Color color) {
-    return List.generate(count, (int index) {
-      return Container(
-        child: Center(
-          child: SoundButton(text: (index + 1).toString(), color: color),
-        ),
-      );
-    });
   }
 }
