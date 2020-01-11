@@ -13,10 +13,13 @@ class SoundButton extends StatefulWidget {
 class _SoundButtonState extends State<SoundButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 50.0,
-      color: widget.color,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          constraints: constraints,
+          color: widget.color,
+        );
+      },
     );
   }
 }

@@ -26,14 +26,10 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Center(
-        child: SoundBoard(
-          verticalItemCount: 8,
-          crossAxisPadding: 5.0,
-          mainAxisPadding: 5.0,
-        ),
-      ),
+        body: SoundBoard(
+      verticalItemCount: 8,
+      crossAxisPadding: 5.0,
+      mainAxisPadding: 5.0,
     ));
   }
 }
