@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class SoundButton extends StatefulWidget {
+class SoundBoardToolbar extends StatefulWidget {
   final String text;
   final Color color;
 
-  SoundButton({Key key, @required this.text, this.color}) : super(key: key);
+  SoundBoardToolbar({Key key, @required this.text, this.color}) : super(key: key);
 
   @override
-  _SoundButtonState createState() => _SoundButtonState();
+  _SoundBoardToolbarState createState() => _SoundBoardToolbarState();
 }
 
-class _SoundButtonState extends State<SoundButton> {
+class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(

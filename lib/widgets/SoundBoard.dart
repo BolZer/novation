@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_sound_board/widgets/SoundButton.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SoundBoard extends StatefulWidget {
   final int verticalItemCount;
@@ -13,91 +15,222 @@ class SoundBoard extends StatefulWidget {
 }
 
 class _SoundBoardState extends State<SoundBoard> {
-  int get _verticalItemCountForQuadrant {
-    return (widget.verticalItemCount / 2).floor().toInt();
-  }
-
-  int get _totalItemCount {
-    return (widget.verticalItemCount * widget.verticalItemCount).floor().toInt();
-  }
-
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                width: (width < height ? width : height) - kToolbarHeight,
-                height: (width < height ? width : height) - kToolbarHeight,
-                child: Column(
+          Expanded(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                child: Row(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: _verticalItemCountForQuadrant,
-                          crossAxisSpacing: widget.crossAxisPadding,
-                          mainAxisSpacing: widget.mainAxisPadding,
-                          padding: EdgeInsets.fromLTRB(0.0, 0.0, widget.crossAxisPadding / 2, widget.mainAxisPadding / 2),
-                          children: this._getQuadrantFixture(_totalItemCount ~/ 4, Colors.pinkAccent),
-                          shrinkWrap: true,
-                        )),
-                        Expanded(
-                            child: GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: _verticalItemCountForQuadrant,
-                          crossAxisSpacing: widget.crossAxisPadding,
-                          mainAxisSpacing: widget.mainAxisPadding,
-                          padding: EdgeInsets.fromLTRB(widget.crossAxisPadding / 2, 0.0, 0.0, widget.mainAxisPadding / 2),
-                          children: this._getQuadrantFixture(_totalItemCount ~/ 4, Colors.greenAccent),
-                          shrinkWrap: true,
-                        )),
-                      ],
+                    Icon(FontAwesomeIcons.githubSquare, size: 35.0),
+                    Expanded(
+                      child: IconButton(
+                        icon: Icon(FontAwesomeIcons.arrowLeft),
+                        onPressed: () {},
+                      ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: _verticalItemCountForQuadrant,
-                          crossAxisSpacing: widget.crossAxisPadding,
-                          mainAxisSpacing: widget.mainAxisPadding,
-                          padding: EdgeInsets.fromLTRB(0.0, widget.mainAxisPadding / 2, widget.crossAxisPadding / 2, 0.0),
-                          children: this._getQuadrantFixture(_totalItemCount ~/ 4, Colors.pinkAccent),
-                          shrinkWrap: true,
-                        )),
-                        Expanded(
-                            child: GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: _verticalItemCountForQuadrant,
-                          crossAxisSpacing: widget.crossAxisPadding,
-                          mainAxisSpacing: widget.mainAxisPadding,
-                          padding: EdgeInsets.fromLTRB(widget.crossAxisPadding / 2, widget.mainAxisPadding / 2, 0.0, 0.0),
-                          children: this._getQuadrantFixture(_totalItemCount ~/ 4, Colors.greenAccent),
-                          shrinkWrap: true,
-                        )),
-                      ],
+                    Expanded(
+                      child: Center(
+                        child: Text("1"),
+                      ),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        icon: Icon(FontAwesomeIcons.arrowRight),
+                        onPressed: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        icon: Icon(FontAwesomeIcons.wrench),
+                        onPressed: () {},
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
+              )),
+          Expanded(
+            flex: 10,
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.pinkAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.pinkAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.greenAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.greenAccent,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.pinkAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.pinkAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.greenAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.greenAccent,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.yellowAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.yellowAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.yellowAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.yellowAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: SoundButton(
+                            text: 1.toString(),
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),
     );
-  }
-
-  List<Widget> _getQuadrantFixture(int count, Color color) {
-    return List.generate(count, (int index) {
-      return SoundButton(text: (index + 1).toString(), color: color);
-    });
   }
 }

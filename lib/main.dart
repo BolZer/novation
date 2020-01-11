@@ -27,7 +27,7 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SoundBoard(
-      verticalItemCount: 8,
+      verticalItemCount: 4,
       crossAxisPadding: 5.0,
       mainAxisPadding: 5.0,
     ));
