@@ -22,8 +22,9 @@ class _SoundButtonState extends State<SoundButton> {
         return GestureDetector(
           onTap: widget.onTap,
           child: Container(
+            padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              border: widget.isFocused ? Border.all(color: Colors.white70, width: 5.0) : null,
+              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.sound.colorValue), width: 5.0),
               color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
             ),
             constraints: constraints,
