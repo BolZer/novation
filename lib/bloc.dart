@@ -17,7 +17,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
   @override
   Stream<SoundBoardState> mapEventToState(SoundBoardEvent event) async* {
     if (event is Initialize) {
-      yield Initialized(audioPlayer: AudioPlayer(), page: state.page, isInEditMode: state.isInEditMode, sounds: await SoundPadRepository().getAllForPage());
+      yield Initialized(audioPlayer: AudioPlayer(), page: state.page, isInEditMode: state.isInEditMode, sounds: await SoundPadRepository().getAllForPage(state.page));
     }
 
     if (event is OpenEditMode) {
@@ -33,11 +33,13 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
     }
 
     if (event is PreviousPage) {
-      yield PreviousPaged(page: state.page > 1 ? state.page - 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, audioPlayer: state.audioPlayer);
+      var newPageCount = state.page > 1 ? state.page - 1 : state.page;
+      yield PreviousPaged(page: newPageCount, isInEditMode: state.isInEditMode, sounds: await SoundPadRepository().getAllForPage(newPageCount), audioPlayer: state.audioPlayer);
     }
 
     if (event is NextPage) {
-      yield NextPaged(page: state.page < 6 ? state.page + 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, audioPlayer: state.audioPlayer);
+      var newPageCount = state.page < 6 ? state.page + 1 : state.page;
+      yield NextPaged(page: newPageCount, isInEditMode: state.isInEditMode, sounds: await SoundPadRepository().getAllForPage(newPageCount), audioPlayer: state.audioPlayer);
     }
 
     if (event is FocusSoundButton) {
@@ -51,13 +53,13 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
     if (event is CreateSoundPadEntry) {
       SoundPad newSound = SoundPad(id: Uuid().v4(), name: "New SoundPad", soundFilePath: "", colorValue: Colors.blueGrey.value, position: event.position);
       await SoundPadRepository().insert(newSound);
-      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(), focusedSoundButton: state.focusedSoundButton, audioPlayer: state.audioPlayer);
+      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(state.page), focusedSoundButton: state.focusedSoundButton, audioPlayer: state.audioPlayer);
       add(FocusSoundButton(newSound));
     }
 
     if (event is DeleteSoundPadEntry) {
       await SoundPadRepository().delete(event.soundPad);
-      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(), focusedSoundButton: null, audioPlayer: state.audioPlayer);
+      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(state.page), focusedSoundButton: null, audioPlayer: state.audioPlayer);
     }
 
     if (event is ChangeFilePathOfFocusedSoundButton) {
