@@ -31,11 +31,24 @@ class _SoundPadWidgetState extends State<SoundPadWidget> {
               constraints: constraints,
               width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
               height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
-              child: widget.isInEditMode ? this.editIconDisplay : null,
+              child: widget.isInEditMode ? this.editIconDisplay : this.iconDisplay,
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget get iconDisplay {
+    return Column(
+      children: <Widget>[
+        if (widget.soundPad != null)
+          Expanded(
+            child: Center(
+              child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          )
+      ],
     );
   }
 
