@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-import 'package:flutter_sound_board/dtos/SoundGridPadPosition.dart';
+import 'package:flutter_sound_board/dtos/SoundPadGridPosition.dart';
 
-class Sound {
+class SoundPad {
   String id;
   String name;
   String soundFilePath;
   int colorValue;
-  SoundGridPosition position;
+  SoundPadGridPosition position;
 
-  Sound({this.id, this.name, this.soundFilePath, this.colorValue, this.position});
+  SoundPad({this.id, this.name, this.soundFilePath, this.colorValue, this.position});
 
-  static Sound fromMap(Map<String, dynamic> map) {
-    return Sound(
+  static SoundPad fromMap(Map<String, dynamic> map) {
+    return SoundPad(
       id: map['id'],
       name: map['name'],
       soundFilePath: map['soundFilePath'],
       colorValue: map['colorValue'],
-      position: SoundGridPosition.fromMap(jsonDecode(map['position'])),
+      position: SoundPadGridPosition.fromMap(jsonDecode(map['position'])),
     );
   }
 

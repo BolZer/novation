@@ -1,12 +1,12 @@
-class SoundGridPosition {
+class SoundPadGridPosition {
   final int page;
   final int row;
   final int column;
 
-  SoundGridPosition({this.page, this.row, this.column});
+  SoundPadGridPosition({this.page, this.row, this.column});
 
-  static SoundGridPosition fromMap(Map<String, dynamic> map) {
-    return SoundGridPosition(
+  static SoundPadGridPosition fromMap(Map<String, dynamic> map) {
+    return SoundPadGridPosition(
       page: map['page'],
       row: map['row'],
       column: map['column'],

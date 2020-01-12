@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
-import 'package:flutter_sound_board/dtos/SoundGridPadPosition.dart';
+import 'package:flutter_sound_board/dtos/SoundPadGridPosition.dart';
 import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:flutter_sound_board/event.dart';
 import 'package:flutter_sound_board/state.dart';
@@ -41,8 +41,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: () {
-                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 0));
+                                SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 0));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 0));
                               }(),
                             ),
                           ),
@@ -50,8 +50,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: () {
-                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 1));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 1));
+                                SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 1));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 1));
                               }(),
                             ),
                           ),
@@ -59,8 +59,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: () {
-                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 2));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 2));
+                                SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 2));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 2));
                               }(),
                             ),
                           ),
@@ -68,8 +68,8 @@ class _SoundBoardState extends State<SoundBoard> {
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
                               child: () {
-                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 3));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 3));
+                                SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 3));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 3));
                               }(),
                             ),
                           ),
@@ -86,12 +86,12 @@ class _SoundBoardState extends State<SoundBoard> {
     );
   }
 
-  Sound _getSoundForPosition(List<Sound> sounds, SoundGridPosition position) {
+  SoundPad _getSoundForPosition(List<SoundPad> sounds, SoundPadGridPosition position) {
     if (sounds.length == 0) {
       return null;
     }
 
-    var filteredSound = sounds.where((Sound sound) {
+    var filteredSound = sounds.where((SoundPad sound) {
       return sound.position.page == position.page && sound.position.column == position.column && sound.position.row == position.row;
     }).toList();
 
@@ -102,9 +102,9 @@ class _SoundBoardState extends State<SoundBoard> {
     return filteredSound.first;
   }
 
-  SoundButton _createSoundButtonForPosition(Sound sound, SoundBoardState state, SoundBoardBloc soundBoardBloc, SoundGridPosition position) {
-    return SoundButton(
-      sound: sound,
+  SoundPadWidget _createSoundButtonForPosition(SoundPad sound, SoundBoardState state, SoundBoardBloc soundBoardBloc, SoundPadGridPosition position) {
+    return SoundPadWidget(
+      soundPad: sound,
       isInEditMode: state.isInEditMode,
       isFocused: sound != null && state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id,
       onTap: () async {

@@ -93,7 +93,7 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
                   }),
       ),
       Expanded(
-        child: Icon(FontAwesomeIcons.githubSquare, size: 40.0),
+        child: IconButton(icon: Icon(FontAwesomeIcons.trash), onPressed: state.focusedSoundButton == null ? null : () {}),
       ),
     ];
   }

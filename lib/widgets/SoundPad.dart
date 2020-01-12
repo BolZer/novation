@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SoundButton extends StatefulWidget {
-  final Sound sound;
+class SoundPadWidget extends StatefulWidget {
+  final SoundPad soundPad;
   final bool isInEditMode;
   final bool isFocused;
   final Function onTap;
 
-  SoundButton({Key key, this.sound, this.isInEditMode = false, this.isFocused = false, this.onTap}) : super(key: key);
+  SoundPadWidget({Key key, this.soundPad, this.isInEditMode = false, this.isFocused = false, this.onTap}) : super(key: key);
 
   @override
-  _SoundButtonState createState() => _SoundButtonState();
+  _SoundPadWidgetState createState() => _SoundPadWidgetState();
 }
 
-class _SoundButtonState extends State<SoundButton> {
+class _SoundPadWidgetState extends State<SoundPadWidget> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -24,8 +24,8 @@ class _SoundButtonState extends State<SoundButton> {
           child: Container(
             padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.sound != null ? widget.sound.colorValue : Colors.grey.value), width: 5.0),
-              color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
+              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.soundPad != null ? widget.soundPad.colorValue : Colors.grey.value), width: 5.0),
+              color: widget.soundPad != null ? Color(widget.soundPad.colorValue) : Colors.grey,
             ),
             constraints: constraints,
             width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
@@ -47,11 +47,11 @@ class _SoundButtonState extends State<SoundButton> {
             size: 25.0,
           ),
         ),
-        if (widget.sound != null)
+        if (widget.soundPad != null)
           Expanded(
             flex: 2,
             child: Center(
-              child: Text(widget.sound.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           )
       ],

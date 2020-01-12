@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_sound_board/dtos/SoundGridPadPosition.dart';
+import 'package:flutter_sound_board/dtos/SoundPadGridPosition.dart';
 import 'package:flutter_sound_board/entities/SoundPad.dart';
 
 abstract class SoundBoardEvent extends Equatable {
@@ -30,13 +30,13 @@ class PreviousPage extends SoundBoardEvent {
 }
 
 class FocusSoundButton extends SoundBoardEvent {
-  final Sound sound;
+  final SoundPad sound;
 
   FocusSoundButton(this.sound) : super();
 }
 
 class UnFocusSoundButton extends SoundBoardEvent {
-  final Sound sound;
+  final SoundPad sound;
 
   UnFocusSoundButton(this.sound) : super();
 }
@@ -58,7 +58,13 @@ class ChangeFilePathOfFocusedSoundButton extends SoundBoardEvent {
 }
 
 class CreateSoundPadEntry extends SoundBoardEvent {
-  final SoundGridPosition position;
+  final SoundPadGridPosition position;
 
   CreateSoundPadEntry(this.position) : super();
+}
+
+class DeleteSoundPadEntry extends SoundBoardEvent {
+  final SoundPadGridPosition position;
+
+  DeleteSoundPadEntry(this.position) : super();
 }
