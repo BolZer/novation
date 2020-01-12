@@ -62,34 +62,32 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(state.page), focusedSoundButton: null, audioPlayer: state.audioPlayer);
     }
 
+    if (event is UpdateSoundPadEntry) {
+      await SoundPadRepository().update(event.soundPad);
+      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(state.page), focusedSoundButton: state.focusedSoundButton, audioPlayer: state.audioPlayer);
+    }
+
     if (event is ChangeFilePathOfFocusedSoundButton) {
-      int positionKey = state.sounds.indexOf(state.focusedSoundButton);
-      SoundPad relevantSound = state.sounds[positionKey];
+      SoundPad relevantSound = state.focusedSoundButton;
       relevantSound.soundFilePath = event.filePath;
 
-      List<SoundPad> newSounds = state.sounds;
-      newSounds[positionKey] = relevantSound;
-
-      yield SoundButtonFilePathChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
+      yield state;
+      add(UpdateSoundPadEntry(relevantSound));
     }
 
     if (event is ChangeNameOfFocusedSoundButton) {
-      int positionKey = state.sounds.indexOf(state.focusedSoundButton);
-      SoundPad relevantSound = state.sounds[positionKey];
+      SoundPad relevantSound = state.focusedSoundButton;
       relevantSound.name = event.name;
 
-      List<SoundPad> newSounds = state.sounds;
-      newSounds[positionKey] = relevantSound;
-
-      yield SoundButtonNameChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
+      yield state;
+      add(UpdateSoundPadEntry(relevantSound));
     }
 
     if (event is ChangeTintOfFocusedSoundButton) {
       List<int> colors = AppConfig.soundButtonColorValues;
       int colorPositionKey = colors.indexOf(state.focusedSoundButton.colorValue);
 
-      int positionKey = state.sounds.indexOf(state.focusedSoundButton);
-      SoundPad relevantSound = state.sounds[positionKey];
+      SoundPad relevantSound = state.focusedSoundButton;
 
       if (colorPositionKey == colors.length - 1) {
         relevantSound.colorValue = colors[0];
@@ -99,10 +97,8 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
         relevantSound.colorValue = colors[colorPositionKey + 1];
       }
 
-      List<SoundPad> newSounds = state.sounds;
-      newSounds[positionKey] = relevantSound;
-
-      yield SoundButtonTintChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
+      yield state;
+      add(UpdateSoundPadEntry(relevantSound));
     }
   }
 }

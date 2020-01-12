@@ -93,36 +93,6 @@ class SoundButtonUnFocused extends SoundBoardState {
   const SoundButtonUnFocused({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
-class SoundButtonTintChanged extends SoundBoardState {
-  final int page;
-  final bool isInEditMode;
-  final List<SoundPad> sounds;
-  final SoundPad focusedSoundButton;
-  final AudioPlayer audioPlayer;
-
-  const SoundButtonTintChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
-}
-
-class SoundButtonNameChanged extends SoundBoardState {
-  final int page;
-  final bool isInEditMode;
-  final List<SoundPad> sounds;
-  final SoundPad focusedSoundButton;
-  final AudioPlayer audioPlayer;
-
-  const SoundButtonNameChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
-}
-
-class SoundButtonFilePathChanged extends SoundBoardState {
-  final int page;
-  final bool isInEditMode;
-  final List<SoundPad> sounds;
-  final SoundPad focusedSoundButton;
-  final AudioPlayer audioPlayer;
-
-  const SoundButtonFilePathChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
-}
-
 class SoundButtonEntryCreated extends SoundBoardState {
   final int page;
   final bool isInEditMode;
@@ -141,4 +111,14 @@ class SoundButtonEntryDeleted extends SoundBoardState {
   final AudioPlayer audioPlayer;
 
   const SoundButtonEntryDeleted({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
+}
+
+class SoundButtonEntryUpdated extends SoundBoardState {
+  final int page;
+  final bool isInEditMode;
+  final List<SoundPad> sounds;
+  final SoundPad focusedSoundButton;
+  final AudioPlayer audioPlayer;
+
+  const SoundButtonEntryUpdated({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
