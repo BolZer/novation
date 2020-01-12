@@ -45,6 +45,7 @@ class _SoundBoardState extends State<SoundBoard> {
                                 return SoundButton(
                                   sound: sound,
                                   isInEditMode: state.isInEditMode,
+                                  isFocused: sound != null && state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id,
                                   onTap: () {
                                     if (sound == null) {
                                       return;

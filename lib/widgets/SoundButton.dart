@@ -5,9 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class SoundButton extends StatefulWidget {
   final Sound sound;
   final bool isInEditMode;
+  final bool isFocused;
   final Function onTap;
 
-  SoundButton({Key key, this.sound, this.isInEditMode = false, this.onTap}) : super(key: key);
+  SoundButton({Key key, this.sound, this.isInEditMode = false, this.isFocused = false, this.onTap}) : super(key: key);
 
   @override
   _SoundButtonState createState() => _SoundButtonState();
@@ -21,10 +22,13 @@ class _SoundButtonState extends State<SoundButton> {
         return GestureDetector(
           onTap: widget.onTap,
           child: Container(
+            decoration: BoxDecoration(
+              border: widget.isFocused ? Border.all(color: Colors.white70, width: 5.0) : null,
+              color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
+            ),
             constraints: constraints,
             width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
-            color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
             child: widget.isInEditMode ? this.editIconDisplay : null,
           ),
         );
