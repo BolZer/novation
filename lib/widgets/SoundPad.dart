@@ -45,7 +45,9 @@ class _SoundPadWidgetState extends State<SoundPadWidget> {
         if (widget.soundPad != null)
           Expanded(
             child: Center(
-              child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              child: FittedBox(
+                child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ),
           )
       ],
@@ -56,17 +58,22 @@ class _SoundPadWidgetState extends State<SoundPadWidget> {
     return Column(
       children: <Widget>[
         Expanded(
-          flex: 10,
-          child: Icon(
-            FontAwesomeIcons.wrench,
-            size: 25.0,
+          flex: 5,
+          child: FittedBox(
+            fit: BoxFit.none,
+            child: Icon(
+              FontAwesomeIcons.wrench,
+              size: 25.0,
+            ),
           ),
         ),
         if (widget.soundPad != null)
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Center(
-              child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              child: FittedBox(
+                child: Text(widget.soundPad.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ),
           )
       ],
