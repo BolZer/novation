@@ -51,7 +51,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
     }
 
     if (event is CreateSoundPadEntry) {
-      SoundPad newSound = SoundPad(id: Uuid().v4(), name: "New SoundPad", soundFilePath: "", colorValue: Colors.blueGrey.value, position: event.position);
+      SoundPad newSound = SoundPad(id: Uuid().v4(), name: "New Sound", soundFilePath: "", colorValue: Colors.blueGrey.value, position: event.position);
       await SoundPadRepository().insert(newSound);
       yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(state.page), focusedSoundButton: state.focusedSoundButton, audioPlayer: state.audioPlayer);
       add(FocusSoundButton(newSound));
