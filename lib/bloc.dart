@@ -55,6 +55,11 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       add(FocusSoundButton(newSound));
     }
 
+    if (event is DeleteSoundPadEntry) {
+      await SoundPadRepository().delete(event.soundPad);
+      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundPadRepository().getAllForPage(), focusedSoundButton: null, audioPlayer: state.audioPlayer);
+    }
+
     if (event is ChangeFilePathOfFocusedSoundButton) {
       int positionKey = state.sounds.indexOf(state.focusedSoundButton);
       SoundPad relevantSound = state.sounds[positionKey];

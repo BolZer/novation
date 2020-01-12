@@ -64,7 +64,7 @@ class CreateSoundPadEntry extends SoundBoardEvent {
 }
 
 class DeleteSoundPadEntry extends SoundBoardEvent {
-  final SoundPadGridPosition position;
+  final SoundPad soundPad;
 
-  DeleteSoundPadEntry(this.position) : super();
+  DeleteSoundPadEntry(this.soundPad) : super();
 }

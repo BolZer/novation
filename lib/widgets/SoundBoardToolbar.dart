@@ -93,7 +93,13 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
                   }),
       ),
       Expanded(
-        child: IconButton(icon: Icon(FontAwesomeIcons.trash), onPressed: state.focusedSoundButton == null ? null : () {}),
+        child: IconButton(
+            icon: Icon(FontAwesomeIcons.trash),
+            onPressed: state.focusedSoundButton == null
+                ? null
+                : () {
+                    soundBoardBloc.add(DeleteSoundPadEntry(state.focusedSoundButton));
+                  }),
       ),
     ];
   }
