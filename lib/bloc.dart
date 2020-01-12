@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound_board/config.dart';
@@ -20,6 +21,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       List<Color> colors = AppConfig.soundButtonColors;
 
       yield Initialized(
+          audioPlayer: AudioPlayer(),
           page: state.page,
           isInEditMode: state.isInEditMode,
           sounds: List.generate(16, (int index) {
@@ -37,31 +39,31 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
     }
 
     if (event is OpenEditMode) {
-      yield EditModeOpened(page: state.page, isInEditMode: true, sounds: state.sounds);
+      yield EditModeOpened(page: state.page, isInEditMode: true, sounds: state.sounds, audioPlayer: state.audioPlayer);
     }
 
     if (event is CloseEditMode) {
-      yield EditModeClosed(page: state.page, isInEditMode: false, sounds: state.sounds);
+      yield EditModeClosed(page: state.page, isInEditMode: false, sounds: state.sounds, audioPlayer: state.audioPlayer);
     }
 
     if (event is CloseEditMode) {
-      yield EditModeClosed(page: state.page, isInEditMode: false, sounds: state.sounds);
+      yield EditModeClosed(page: state.page, isInEditMode: false, sounds: state.sounds, audioPlayer: state.audioPlayer);
     }
 
     if (event is PreviousPage) {
-      yield PreviousPaged(page: state.page > 1 ? state.page - 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds);
+      yield PreviousPaged(page: state.page > 1 ? state.page - 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, audioPlayer: state.audioPlayer);
     }
 
     if (event is NextPage) {
-      yield NextPaged(page: state.page < 6 ? state.page + 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds);
+      yield NextPaged(page: state.page < 6 ? state.page + 1 : state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, audioPlayer: state.audioPlayer);
     }
 
     if (event is FocusSoundButton) {
-      yield SoundButtonFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: event.sound);
+      yield SoundButtonFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: event.sound, audioPlayer: state.audioPlayer);
     }
 
     if (event is UnFocusSoundButton) {
-      yield SoundButtonUnFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: null);
+      yield SoundButtonUnFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: null, audioPlayer: state.audioPlayer);
     }
 
     if (event is ChangeFilePathOfFocusedSoundButton) {
@@ -72,7 +74,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       List<Sound> newSounds = state.sounds;
       newSounds[positionKey] = relevantSound;
 
-      yield SoundButtonFilePathChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound);
+      yield SoundButtonFilePathChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
     }
 
     if (event is ChangeNameOfFocusedSoundButton) {
@@ -83,7 +85,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       List<Sound> newSounds = state.sounds;
       newSounds[positionKey] = relevantSound;
 
-      yield SoundButtonNameChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound);
+      yield SoundButtonNameChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
     }
 
     if (event is ChangeTintOfFocusedSoundButton) {
@@ -104,7 +106,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       List<Sound> newSounds = state.sounds;
       newSounds[positionKey] = relevantSound;
 
-      yield SoundButtonTintChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound);
+      yield SoundButtonTintChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound, audioPlayer: state.audioPlayer);
     }
   }
 }

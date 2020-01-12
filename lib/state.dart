@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sound_board/entities/Sound.dart';
 
@@ -7,8 +8,9 @@ abstract class SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundBoardState({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton});
+  const SoundBoardState({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer});
 }
 
 class Ready extends SoundBoardState {
@@ -16,8 +18,9 @@ class Ready extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const Ready({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const Ready({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class Initialized extends SoundBoardState {
@@ -25,8 +28,9 @@ class Initialized extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const Initialized({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const Initialized({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class EditModeOpened extends SoundBoardState {
@@ -34,8 +38,9 @@ class EditModeOpened extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const EditModeOpened({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const EditModeOpened({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class EditModeClosed extends SoundBoardState {
@@ -43,8 +48,9 @@ class EditModeClosed extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const EditModeClosed({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const EditModeClosed({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class NextPaged extends SoundBoardState {
@@ -52,8 +58,9 @@ class NextPaged extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const NextPaged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const NextPaged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class PreviousPaged extends SoundBoardState {
@@ -61,8 +68,9 @@ class PreviousPaged extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const PreviousPaged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const PreviousPaged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class SoundButtonFocused extends SoundBoardState {
@@ -70,8 +78,9 @@ class SoundButtonFocused extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundButtonFocused({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const SoundButtonFocused({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class SoundButtonUnFocused extends SoundBoardState {
@@ -79,8 +88,9 @@ class SoundButtonUnFocused extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundButtonUnFocused({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const SoundButtonUnFocused({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class SoundButtonTintChanged extends SoundBoardState {
@@ -88,8 +98,9 @@ class SoundButtonTintChanged extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundButtonTintChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const SoundButtonTintChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class SoundButtonNameChanged extends SoundBoardState {
@@ -97,8 +108,9 @@ class SoundButtonNameChanged extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundButtonNameChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const SoundButtonNameChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }
 
 class SoundButtonFilePathChanged extends SoundBoardState {
@@ -106,6 +118,7 @@ class SoundButtonFilePathChanged extends SoundBoardState {
   final bool isInEditMode;
   final List<Sound> sounds;
   final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
 
-  const SoundButtonFilePathChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+  const SoundButtonFilePathChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }

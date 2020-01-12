@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_sound_board/entities/Sound.dart';
 import 'package:flutter_sound_board/event.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:flutter_sound_board/widgets/SoundBoardToolbar.dart';
-import 'package:flutter_sound_board/widgets/SoundButton.dart';
+import 'package:flutter_sound_board/widgets/SoundPad.dart';
 
 class SoundBoard extends StatefulWidget {
   SoundBoard({Key key}) : super(key: key);
@@ -117,6 +118,14 @@ class _SoundBoardState extends State<SoundBoard> {
 
         if (state.isInEditMode && (state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id)) {
           soundBoardBloc.add(UnFocusSoundButton(sound));
+        }
+
+        if (!state.isInEditMode && sound.soundFilePath != "" && state.audioPlayer.state == AudioPlayerState.PLAYING) {
+          state.audioPlayer.stop();
+        }
+
+        if (!state.isInEditMode && sound.soundFilePath != "") {
+          state.audioPlayer.play(sound.soundFilePath, isLocal: true);
         }
       },
     );
