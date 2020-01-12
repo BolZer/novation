@@ -23,13 +23,16 @@ class _SoundBoardState extends State<SoundBoard> {
     // ignore: close_sinks
     final soundBoardBloc = BlocProvider.of<SoundBoardBloc>(context);
 
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
+
     return BlocBuilder<SoundBoardBloc, SoundBoardState>(
       builder: (BuildContext context, SoundBoardState state) {
         return SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Expanded(flex: 1, child: SoundBoardToolbar()),
+              Expanded(flex: 2, child: SoundBoardToolbar()),
               Expanded(
                 flex: 10,
                 child: Column(
@@ -64,15 +67,16 @@ class _SoundBoardState extends State<SoundBoard> {
                               }(),
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: () {
-                                SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 3));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 3));
-                              }(),
+                          if (!useMobileLayout)
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: () {
+                                  SoundPad sound = _getSoundForPosition(state.sounds, SoundPadGridPosition(page: state.page, row: index, column: 3));
+                                  return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundPadGridPosition(page: state.page, row: index, column: 3));
+                                }(),
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     );
