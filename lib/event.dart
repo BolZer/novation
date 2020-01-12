@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/dtos/SoundGridPadPosition.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 
 abstract class SoundBoardEvent extends Equatable {
   SoundBoardEvent([List props = const []]) : super();
@@ -54,4 +55,10 @@ class ChangeFilePathOfFocusedSoundButton extends SoundBoardEvent {
   final String filePath;
 
   ChangeFilePathOfFocusedSoundButton(this.filePath) : super();
+}
+
+class CreateSoundPadEntry extends SoundBoardEvent {
+  final SoundGridPosition position;
+
+  CreateSoundPadEntry(this.position) : super();
 }

@@ -1,6 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 
 @immutable
 abstract class SoundBoardState {
@@ -121,4 +121,14 @@ class SoundButtonFilePathChanged extends SoundBoardState {
   final AudioPlayer audioPlayer;
 
   const SoundButtonFilePathChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
+}
+
+class SoundButtonEntryCreated extends SoundBoardState {
+  final int page;
+  final bool isInEditMode;
+  final List<Sound> sounds;
+  final Sound focusedSoundButton;
+  final AudioPlayer audioPlayer;
+
+  const SoundButtonEntryCreated({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton, this.audioPlayer}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton, audioPlayer: audioPlayer);
 }

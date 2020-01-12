@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:flutter_sound_board/service/Database.dart';
 import 'package:sembast/sembast.dart';
 import 'package:uuid/uuid.dart';
 
-class AlertRepository {
-  static const String SOUND_STORE_NAME = 'alerts';
+class SoundRepository {
+  static const String SOUND_STORE_NAME = 'sounds';
   final _soundStore = StoreRef(SOUND_STORE_NAME);
 
   Future<Database> get _database async => await AppDatabase.instance.database;

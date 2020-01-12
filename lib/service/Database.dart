@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 
-const DATABASE_NAME = "sb.db";
+const DATABASE_NAME = "sb3.db";
 
 class AppDatabase {
   AppDatabase._();

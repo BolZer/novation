@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
-import 'package:flutter_sound_board/dtos/SoundGridPosition.dart';
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/dtos/SoundGridPadPosition.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:flutter_sound_board/event.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:flutter_sound_board/widgets/SoundBoardToolbar.dart';
@@ -42,7 +42,7 @@ class _SoundBoardState extends State<SoundBoard> {
                               padding: EdgeInsets.all(5.0),
                               child: () {
                                 Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 0));
                               }(),
                             ),
                           ),
@@ -51,7 +51,7 @@ class _SoundBoardState extends State<SoundBoard> {
                               padding: EdgeInsets.all(5.0),
                               child: () {
                                 Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 1));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 1));
                               }(),
                             ),
                           ),
@@ -60,7 +60,7 @@ class _SoundBoardState extends State<SoundBoard> {
                               padding: EdgeInsets.all(5.0),
                               child: () {
                                 Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 2));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 2));
                               }(),
                             ),
                           ),
@@ -69,7 +69,7 @@ class _SoundBoardState extends State<SoundBoard> {
                               padding: EdgeInsets.all(5.0),
                               child: () {
                                 Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 3));
-                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc, SoundGridPosition(page: state.page, row: index, column: 3));
                               }(),
                             ),
                           ),
@@ -102,13 +102,17 @@ class _SoundBoardState extends State<SoundBoard> {
     return filteredSound.first;
   }
 
-  SoundButton _createSoundButtonForPosition(Sound sound, SoundBoardState state, SoundBoardBloc soundBoardBloc) {
+  SoundButton _createSoundButtonForPosition(Sound sound, SoundBoardState state, SoundBoardBloc soundBoardBloc, SoundGridPosition position) {
     return SoundButton(
       sound: sound,
       isInEditMode: state.isInEditMode,
       isFocused: sound != null && state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id,
-      onTap: () {
-        if (sound == null) {
+      onTap: () async {
+        if (state.isInEditMode && sound == null) {
+          soundBoardBloc.add(CreateSoundPadEntry(position));
+        }
+
+        if (!state.isInEditMode && sound == null) {
           return;
         }
 

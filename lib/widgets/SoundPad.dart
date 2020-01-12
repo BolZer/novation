@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SoundButton extends StatefulWidget {
@@ -47,12 +47,13 @@ class _SoundButtonState extends State<SoundButton> {
             size: 25.0,
           ),
         ),
-        Expanded(
-          flex: 2,
-          child: Center(
-            child: Text(widget.sound.name, style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-        )
+        if (widget.sound != null)
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(widget.sound.name, style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          )
       ],
     );
   }

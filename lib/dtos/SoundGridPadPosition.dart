@@ -12,4 +12,12 @@ class SoundGridPosition {
       column: map['column'],
     );
   }
+
+  Map<String, dynamic> toMap() => {
+        'page': page,
+        'row': row,
+        'column': column,
+      };
+
+  Map<String, dynamic> toJson() => toMap();
 }

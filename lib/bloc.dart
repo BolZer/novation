@@ -1,13 +1,12 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound_board/config.dart';
-import 'package:flutter_sound_board/dtos/SoundGridPosition.dart';
-import 'package:flutter_sound_board/entities/Sound.dart';
+import 'package:flutter_sound_board/entities/SoundPad.dart';
 import 'package:flutter_sound_board/event.dart';
+import 'package:flutter_sound_board/repositories/SoundPadRepository.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,24 +17,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
   @override
   Stream<SoundBoardState> mapEventToState(SoundBoardEvent event) async* {
     if (event is Initialize) {
-      List<Color> colors = AppConfig.soundButtonColors;
-
-      yield Initialized(
-          audioPlayer: AudioPlayer(),
-          page: state.page,
-          isInEditMode: state.isInEditMode,
-          sounds: List.generate(16, (int index) {
-            return Sound(
-                id: Uuid().v4(),
-                name: "Test",
-                colorValue: colors[(new Random()).nextInt(colors.length)].value,
-                soundFilePath: "",
-                position: SoundGridPosition(
-                  page: 1,
-                  row: index % 4,
-                  column: index ~/ 4,
-                ));
-          }));
+      yield Initialized(audioPlayer: AudioPlayer(), page: state.page, isInEditMode: state.isInEditMode, sounds: await SoundRepository().getAllForPage());
     }
 
     if (event is OpenEditMode) {
@@ -64,6 +46,13 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
 
     if (event is UnFocusSoundButton) {
       yield SoundButtonUnFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: null, audioPlayer: state.audioPlayer);
+    }
+
+    if (event is CreateSoundPadEntry) {
+      Sound newSound = Sound(id: Uuid().v4(), name: "New SoundPad", soundFilePath: "", colorValue: Colors.blueGrey.value, position: event.position);
+      await SoundRepository().insert(newSound);
+      yield SoundButtonEntryCreated(page: state.page, isInEditMode: true, sounds: await SoundRepository().getAllForPage(), focusedSoundButton: state.focusedSoundButton, audioPlayer: state.audioPlayer);
+      add(FocusSoundButton(newSound));
     }
 
     if (event is ChangeFilePathOfFocusedSoundButton) {
