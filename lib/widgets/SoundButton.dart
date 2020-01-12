@@ -33,22 +33,22 @@ class _SoundButtonState extends State<SoundButton> {
   }
 
   Widget get editIconDisplay {
-    return FittedBox(
-      fit: BoxFit.none,
-      child: Container(
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          flex: 10,
           child: Icon(
             FontAwesomeIcons.wrench,
-            size: 20.0,
-            color: Colors.black87,
+            size: 25.0,
           ),
         ),
-      ),
+        Expanded(
+          flex: 2,
+          child: Center(
+            child: Text(widget.sound.name, style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+        )
+      ],
     );
   }
 }

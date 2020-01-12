@@ -70,6 +70,12 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
                             content: TextField(
                               controller: controller,
                             ),
+                            actions: <Widget>[
+                              RaisedButton(
+                                child: Text('Submit'),
+                                onPressed: () {},
+                              )
+                            ],
                           );
                         });
                   }),
