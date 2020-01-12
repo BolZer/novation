@@ -19,18 +19,20 @@ class _SoundPadWidgetState extends State<SoundPadWidget> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return GestureDetector(
-          onTap: widget.onTap,
-          child: Container(
-            padding: EdgeInsets.all(5.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.soundPad != null ? widget.soundPad.colorValue : Colors.grey.value), width: 5.0),
-              color: widget.soundPad != null ? Color(widget.soundPad.colorValue) : Colors.grey,
+        return Material(
+          color: widget.soundPad != null ? Color(widget.soundPad.colorValue) : Colors.grey,
+          child: InkWell(
+            onTap: widget.onTap,
+            child: Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.soundPad != null ? widget.soundPad.colorValue : Colors.transparent.value), width: 5.0),
+              ),
+              constraints: constraints,
+              width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
+              height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
+              child: widget.isInEditMode ? this.editIconDisplay : null,
             ),
-            constraints: constraints,
-            width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
-            height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
-            child: widget.isInEditMode ? this.editIconDisplay : null,
           ),
         );
       },
