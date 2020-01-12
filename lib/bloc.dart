@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sound_board/config.dart';
 import 'package:flutter_sound_board/entities/Sound.dart';
 import 'package:flutter_sound_board/entities/SoundGridPosition.dart';
 import 'package:flutter_sound_board/event.dart';
@@ -16,7 +17,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
   @override
   Stream<SoundBoardState> mapEventToState(SoundBoardEvent event) async* {
     if (event is Initialize) {
-      List<Color> colors = [Colors.pinkAccent, Colors.yellowAccent, Colors.blueAccent, Colors.greenAccent];
+      List<Color> colors = AppConfig.soundButtonColors;
 
       yield Initialized(
           page: state.page,
@@ -64,7 +65,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
     }
 
     if (event is ChangeTintOfSoundButton) {
-      List<int> colors = [Colors.pinkAccent.value, Colors.yellowAccent.value, Colors.blueAccent.value, Colors.greenAccent.value];
+      List<int> colors = AppConfig.soundButtonColorValues;
       int colorPositionKey = colors.indexOf(state.focusedSoundButton.colorValue);
 
       int positionKey = state.sounds.indexOf(state.focusedSoundButton);
