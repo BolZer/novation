@@ -25,10 +25,30 @@ class _SoundButtonState extends State<SoundButton> {
             width: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             height: constraints.maxHeight < constraints.maxWidth ? constraints.maxHeight : constraints.maxWidth,
             color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
-            child: widget.isInEditMode ? Icon(FontAwesomeIcons.wrench) : null,
+            child: widget.isInEditMode ? this.editIconDisplay : null,
           ),
         );
       },
+    );
+  }
+
+  Widget get editIconDisplay {
+    return FittedBox(
+      fit: BoxFit.none,
+      child: Container(
+        decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Icon(
+            FontAwesomeIcons.wrench,
+            size: 20.0,
+            color: Colors.black87,
+          ),
+        ),
+      ),
     );
   }
 }

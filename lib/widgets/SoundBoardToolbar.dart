@@ -55,7 +55,24 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
         child: IconButton(icon: Icon(FontAwesomeIcons.music), onPressed: null),
       ),
       Expanded(
-        child: IconButton(icon: Icon(FontAwesomeIcons.fileSignature), onPressed: null),
+        child: IconButton(
+            icon: Icon(FontAwesomeIcons.fileSignature),
+            onPressed: state.focusedSoundButton == null
+                ? null
+                : () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          TextEditingController controller = TextEditingController();
+
+                          return AlertDialog(
+                            title: Text("Name this Sound Button"),
+                            content: TextField(
+                              controller: controller,
+                            ),
+                          );
+                        });
+                  }),
       ),
       Expanded(
         child: Icon(FontAwesomeIcons.githubSquare, size: 40.0),
