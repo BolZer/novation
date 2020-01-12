@@ -48,11 +48,8 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
             onPressed: state.focusedSoundButton == null
                 ? null
                 : () {
-                    soundBoardBloc.add(ChangeTintOfSoundButton());
+                    soundBoardBloc.add(ChangeTintOfFocusedSoundButton());
                   }),
-      ),
-      Expanded(
-        child: IconButton(icon: Icon(FontAwesomeIcons.music), onPressed: null),
       ),
       Expanded(
         child: IconButton(
@@ -63,7 +60,7 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          TextEditingController controller = TextEditingController();
+                          TextEditingController controller = TextEditingController(text: state.focusedSoundButton.name);
 
                           return AlertDialog(
                             title: Text("Name this Sound Button"),
@@ -73,12 +70,18 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
                             actions: <Widget>[
                               RaisedButton(
                                 child: Text('Submit'),
-                                onPressed: () {},
+                                onPressed: () {
+                                  soundBoardBloc.add(ChangeNameOfFocusedSoundButton(controller.text));
+                                  Navigator.pop(context);
+                                },
                               )
                             ],
                           );
                         });
                   }),
+      ),
+      Expanded(
+        child: IconButton(icon: Icon(FontAwesomeIcons.music), onPressed: null),
       ),
       Expanded(
         child: Icon(FontAwesomeIcons.githubSquare, size: 40.0),

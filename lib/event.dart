@@ -40,6 +40,12 @@ class UnFocusSoundButton extends SoundBoardEvent {
   UnFocusSoundButton(this.sound) : super();
 }
 
-class ChangeTintOfSoundButton extends SoundBoardEvent {
-  ChangeTintOfSoundButton() : super();
+class ChangeNameOfFocusedSoundButton extends SoundBoardEvent {
+  final String name;
+
+  ChangeNameOfFocusedSoundButton(this.name) : super();
+}
+
+class ChangeTintOfFocusedSoundButton extends SoundBoardEvent {
+  ChangeTintOfFocusedSoundButton() : super();
 }

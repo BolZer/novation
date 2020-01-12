@@ -1,4 +1,4 @@
-import 'package:flutter_sound_board/entities/SoundGridPosition.dart';
+import 'package:flutter_sound_board/dtos/SoundGridPosition.dart';
 
 class Sound {
   String id;

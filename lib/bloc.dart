@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound_board/config.dart';
+import 'package:flutter_sound_board/dtos/SoundGridPosition.dart';
 import 'package:flutter_sound_board/entities/Sound.dart';
-import 'package:flutter_sound_board/entities/SoundGridPosition.dart';
 import 'package:flutter_sound_board/event.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:uuid/uuid.dart';
@@ -64,7 +64,18 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       yield SoundButtonUnFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: null);
     }
 
-    if (event is ChangeTintOfSoundButton) {
+    if (event is ChangeNameOfFocusedSoundButton) {
+      int positionKey = state.sounds.indexOf(state.focusedSoundButton);
+      Sound relevantSound = state.sounds[positionKey];
+      relevantSound.name = event.name;
+
+      List<Sound> newSounds = state.sounds;
+      newSounds[positionKey] = relevantSound;
+
+      yield SoundButtonNameChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound);
+    }
+
+    if (event is ChangeTintOfFocusedSoundButton) {
       List<int> colors = AppConfig.soundButtonColorValues;
       int colorPositionKey = colors.indexOf(state.focusedSoundButton.colorValue);
 
