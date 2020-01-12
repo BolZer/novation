@@ -100,3 +100,12 @@ class SoundButtonNameChanged extends SoundBoardState {
 
   const SoundButtonNameChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
 }
+
+class SoundButtonFilePathChanged extends SoundBoardState {
+  final int page;
+  final bool isInEditMode;
+  final List<Sound> sounds;
+  final Sound focusedSoundButton;
+
+  const SoundButtonFilePathChanged({this.page, this.isInEditMode, this.sounds, this.focusedSoundButton}) : super(page: page, isInEditMode: isInEditMode, sounds: sounds, focusedSoundButton: focusedSoundButton);
+}

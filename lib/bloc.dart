@@ -64,6 +64,17 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
       yield SoundButtonUnFocused(page: state.page, isInEditMode: state.isInEditMode, sounds: state.sounds, focusedSoundButton: null);
     }
 
+    if (event is ChangeFilePathOfFocusedSoundButton) {
+      int positionKey = state.sounds.indexOf(state.focusedSoundButton);
+      Sound relevantSound = state.sounds[positionKey];
+      relevantSound.soundFilePath = event.filePath;
+
+      List<Sound> newSounds = state.sounds;
+      newSounds[positionKey] = relevantSound;
+
+      yield SoundButtonFilePathChanged(page: state.page, isInEditMode: state.isInEditMode, sounds: newSounds, focusedSoundButton: relevantSound);
+    }
+
     if (event is ChangeNameOfFocusedSoundButton) {
       int positionKey = state.sounds.indexOf(state.focusedSoundButton);
       Sound relevantSound = state.sounds[positionKey];

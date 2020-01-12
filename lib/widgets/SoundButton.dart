@@ -24,7 +24,7 @@ class _SoundButtonState extends State<SoundButton> {
           child: Container(
             padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.sound.colorValue), width: 5.0),
+              border: Border.all(color: widget.isFocused ? Colors.white70 : Color(widget.sound != null ? widget.sound.colorValue : Colors.grey.value), width: 5.0),
               color: widget.sound != null ? Color(widget.sound.colorValue) : Colors.grey,
             ),
             constraints: constraints,

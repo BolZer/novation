@@ -90,9 +90,15 @@ class _SoundBoardState extends State<SoundBoard> {
       return null;
     }
 
-    return sounds.where((Sound sound) {
+    var filteredSound = sounds.where((Sound sound) {
       return sound.position.page == position.page && sound.position.column == position.column && sound.position.row == position.row;
-    }).first;
+    }).toList();
+
+    if (filteredSound.length == 0) {
+      return null;
+    }
+
+    return filteredSound.first;
   }
 
   SoundButton _createSoundButtonForPosition(Sound sound, SoundBoardState state, SoundBoardBloc soundBoardBloc) {

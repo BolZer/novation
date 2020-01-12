@@ -49,3 +49,9 @@ class ChangeNameOfFocusedSoundButton extends SoundBoardEvent {
 class ChangeTintOfFocusedSoundButton extends SoundBoardEvent {
   ChangeTintOfFocusedSoundButton() : super();
 }
+
+class ChangeFilePathOfFocusedSoundButton extends SoundBoardEvent {
+  final String filePath;
+
+  ChangeFilePathOfFocusedSoundButton(this.filePath) : super();
+}
