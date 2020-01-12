@@ -20,7 +20,7 @@ class _SoundBoardState extends State<SoundBoard> {
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    final soundBarBloc = BlocProvider.of<SoundBoardBloc>(context);
+    final soundBoardBloc = BlocProvider.of<SoundBoardBloc>(context);
 
     return BlocBuilder<SoundBoardBloc, SoundBoardState>(
       builder: (BuildContext context, SoundBoardState state) {
@@ -41,53 +41,35 @@ class _SoundBoardState extends State<SoundBoard> {
                               padding: EdgeInsets.all(5.0),
                               child: () {
                                 Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0));
-
-                                return SoundButton(
-                                  sound: sound,
-                                  isInEditMode: state.isInEditMode,
-                                  isFocused: sound != null && state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id,
-                                  onTap: () {
-                                    if (sound == null) {
-                                      return;
-                                    }
-
-                                    if (state.isInEditMode && (state.focusedSoundButton == null || state.focusedSoundButton.id != sound.id)) {
-                                      soundBarBloc.add(FocusSoundButton(sound));
-                                    }
-
-                                    if (state.isInEditMode && (state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id)) {
-                                      soundBarBloc.add(UnFocusSoundButton(sound));
-                                    }
-                                  },
-                                );
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
                               }(),
                             ),
                           ),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 1)),
-                                isInEditMode: state.isInEditMode,
-                              ),
+                              child: () {
+                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 1));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                              }(),
                             ),
                           ),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 2)),
-                                isInEditMode: state.isInEditMode,
-                              ),
+                              child: () {
+                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 2));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                              }(),
                             ),
                           ),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 3)),
-                                isInEditMode: state.isInEditMode,
-                              ),
+                              child: () {
+                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 3));
+                                return _createSoundButtonForPosition(sound, state, soundBoardBloc);
+                              }(),
                             ),
                           ),
                         ],
@@ -111,5 +93,26 @@ class _SoundBoardState extends State<SoundBoard> {
     return sounds.where((Sound sound) {
       return sound.position.page == position.page && sound.position.column == position.column && sound.position.row == position.row;
     }).first;
+  }
+
+  SoundButton _createSoundButtonForPosition(Sound sound, SoundBoardState state, SoundBoardBloc soundBoardBloc) {
+    return SoundButton(
+      sound: sound,
+      isInEditMode: state.isInEditMode,
+      isFocused: sound != null && state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id,
+      onTap: () {
+        if (sound == null) {
+          return;
+        }
+
+        if (state.isInEditMode && (state.focusedSoundButton == null || state.focusedSoundButton.id != sound.id)) {
+          soundBoardBloc.add(FocusSoundButton(sound));
+        }
+
+        if (state.isInEditMode && (state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id)) {
+          soundBoardBloc.add(UnFocusSoundButton(sound));
+        }
+      },
+    );
   }
 }
