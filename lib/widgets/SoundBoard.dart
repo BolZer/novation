@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
 import 'package:flutter_sound_board/entities/Sound.dart';
 import 'package:flutter_sound_board/entities/SoundGridPosition.dart';
+import 'package:flutter_sound_board/event.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:flutter_sound_board/widgets/SoundBoardToolbar.dart';
 import 'package:flutter_sound_board/widgets/SoundButton.dart';
@@ -18,6 +19,9 @@ class SoundBoard extends StatefulWidget {
 class _SoundBoardState extends State<SoundBoard> {
   @override
   Widget build(BuildContext context) {
+    // ignore: close_sinks
+    final soundBarBloc = BlocProvider.of<SoundBoardBloc>(context);
+
     return BlocBuilder<SoundBoardBloc, SoundBoardState>(
       builder: (BuildContext context, SoundBoardState state) {
         return SafeArea(
@@ -35,10 +39,27 @@ class _SoundBoardState extends State<SoundBoard> {
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(5.0),
-                              child: SoundButton(
-                                sound: _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0)),
-                                isInEditMode: state.isInEditMode,
-                              ),
+                              child: () {
+                                Sound sound = _getSoundForPosition(state.sounds, SoundGridPosition(page: state.page, row: index, column: 0));
+
+                                return SoundButton(
+                                  sound: sound,
+                                  isInEditMode: state.isInEditMode,
+                                  onTap: () {
+                                    if (sound == null) {
+                                      return;
+                                    }
+
+                                    if (state.isInEditMode && (state.focusedSoundButton == null || state.focusedSoundButton.id != sound.id)) {
+                                      soundBarBloc.add(FocusSoundButton(sound));
+                                    }
+
+                                    if (state.isInEditMode && (state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id)) {
+                                      soundBarBloc.add(UnFocusSoundButton(sound));
+                                    }
+                                  },
+                                );
+                              }(),
                             ),
                           ),
                           Expanded(

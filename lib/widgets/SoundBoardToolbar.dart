@@ -43,7 +43,13 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
         ),
       ),
       Expanded(
-        child: IconButton(icon: Icon(FontAwesomeIcons.tint), onPressed: null),
+        child: IconButton(
+            icon: Icon(FontAwesomeIcons.tint),
+            onPressed: state.focusedSoundButton == null
+                ? null
+                : () {
+                    soundBoardBloc.add(ChangeTintOfSoundButton());
+                  }),
       ),
       Expanded(
         child: IconButton(icon: Icon(FontAwesomeIcons.music), onPressed: null),

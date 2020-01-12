@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_sound_board/entities/Sound.dart';
 
 abstract class SoundBoardEvent extends Equatable {
   SoundBoardEvent([List props = const []]) : super();
@@ -25,4 +26,20 @@ class NextPage extends SoundBoardEvent {
 
 class PreviousPage extends SoundBoardEvent {
   PreviousPage() : super();
+}
+
+class FocusSoundButton extends SoundBoardEvent {
+  final Sound sound;
+
+  FocusSoundButton(this.sound) : super();
+}
+
+class UnFocusSoundButton extends SoundBoardEvent {
+  final Sound sound;
+
+  UnFocusSoundButton(this.sound) : super();
+}
+
+class ChangeTintOfSoundButton extends SoundBoardEvent {
+  ChangeTintOfSoundButton() : super();
 }
