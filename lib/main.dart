@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
 import 'package:flutter_sound_board/event.dart';
+import 'package:flutter_sound_board/state.dart';
+import 'package:flutter_sound_board/widgets/LoadingPlaceholder.dart';
 import 'package:flutter_sound_board/widgets/SoundBoard.dart';
 
 void main() => runApp(MyApp());
@@ -36,6 +38,8 @@ class _MainState extends State<Main> {
 
     soundBarBloc.add(Initialize());
 
-    return Scaffold(body: SoundBoard());
+    return BlocBuilder<SoundBoardBloc, SoundBoardState>(builder: (BuildContext context, SoundBoardState state) {
+      return state is Ready ? Scaffold(body: LoadingPlaceholder()) : Scaffold(body: SoundBoard());
+    });
   }
 }

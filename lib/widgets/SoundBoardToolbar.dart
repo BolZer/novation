@@ -143,7 +143,12 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
         ),
       ),
       Expanded(
-        child: Icon(FontAwesomeIcons.githubSquare, size: 40.0),
+        child: Image(
+          height: 45.0,
+          width: 45.0,
+          fit: BoxFit.contain,
+          image: AssetImage('assets/logo.png'),
+        ),
       ),
     ];
   }
