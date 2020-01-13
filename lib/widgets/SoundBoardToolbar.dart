@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound_board/bloc.dart';
 import 'package:flutter_sound_board/event.dart';
+import 'package:flutter_sound_board/pages/Credits.dart';
 import 'package:flutter_sound_board/state.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -144,7 +145,11 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
       ),
       Expanded(
         child: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Credits();
+            }));
+          },
           icon: Image(
             height: 40.0,
             width: 40.0,

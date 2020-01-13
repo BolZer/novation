@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -126,6 +128,11 @@ class _SoundBoardState extends State<SoundBoard> {
 
         if (state.isInEditMode && (state.focusedSoundButton != null && state.focusedSoundButton.id == sound.id)) {
           soundBoardBloc.add(UnFocusSoundButton(sound));
+        }
+
+        if (!state.isInEditMode && sound.soundFilePath != "" && !await io.File(sound.soundFilePath).exists()) {
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text('File for Sound Pad not found. Please select a new sound file for pad')));
+          return;
         }
 
         if (!state.isInEditMode && sound.soundFilePath != "" && state.audioPlayer.state == AudioPlayerState.PLAYING) {
