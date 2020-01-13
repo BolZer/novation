@@ -69,7 +69,7 @@ class SoundBoardBloc extends Bloc<SoundBoardEvent, SoundBoardState> {
 
     if (event is ChangeFilePathOfFocusedSoundButton) {
       SoundPad relevantSound = state.focusedSoundButton;
-      relevantSound.soundFilePath = event.filePath;
+      relevantSound.soundFilePath = event.filePath != null ? event.filePath : "";
 
       yield state;
       add(UpdateSoundPadEntry(relevantSound));

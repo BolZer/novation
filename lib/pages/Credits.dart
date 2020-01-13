@@ -32,9 +32,6 @@ class Credits extends StatelessWidget {
                   Divider(),
                   Table(
                     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                    columnWidths: {
-                      0: FlexColumnWidth(0.7),
-                    },
                     children: [
                       TableRow(children: [
                         Row(
