@@ -143,11 +143,14 @@ class _SoundBoardToolbarState extends State<SoundBoardToolbar> {
         ),
       ),
       Expanded(
-        child: Image(
-          height: 45.0,
-          width: 45.0,
-          fit: BoxFit.contain,
-          image: AssetImage('assets/logo.png'),
+        child: IconButton(
+          onPressed: () {},
+          icon: Image(
+            height: 40.0,
+            width: 40.0,
+            fit: BoxFit.contain,
+            image: AssetImage('assets/logo.png'),
+          ),
         ),
       ),
     ];
